@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="RegistrationDetails">
+    <Key>
+      <PropertyRef Name="Sno" />
+    </Key>
+    <Property Name="Sno" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone_Num" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Pincode" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="cshopModelStoreContainer">
+    <EntitySet Name="RegistrationDetails" EntityType="Self.RegistrationDetails" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

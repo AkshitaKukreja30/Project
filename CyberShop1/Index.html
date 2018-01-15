@@ -1,0 +1,171 @@
+﻿<html ng-app="CyberShop">
+<head>
+<meta charset="utf-8" />
+<title>CYBERSHOP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script src="Scripts/jquery-1.9.1.min.js"></script>
+<script  src="Scripts/bootstrap.min.js"></script>
+<script src="Scripts/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="Scripts/Service.js"></script>
+<link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .borderforforms {
+        width: 40%;
+        height: 80%;
+        padding-left: 1em;
+        padding-right:1em;
+        padding-top:2em;
+        border-radius: 25px;
+        /*background: #73AD21;*/
+        background: aqua;
+        border:thick;
+    }
+label
+{
+    /*font-weight:bold;*/
+    font-family:Arial;
+    font-size:small;
+}
+
+h1{
+    font-size:xx-large;
+    background-color:black;
+    color:white;
+}
+
+</style>
+<h1>CYBERSHOP</h1>
+</head>
+<body>
+<hr />
+<form class="borderforforms" name="registerationform" novalidate>
+<div class="form-group-sm">
+<div class="row">
+<div class="col-lg-4" ng-class="{ 'has-error' : registerationform.firstname.$invalid && registerationform.firstname.$touched }"> 
+<label>FIRST NAME:</label>
+<input type="text" ng-model="a.First_Name" name="firstname" class="form-control" placeholder="Enter First Name" id="fn"
+ ng-pattern=pattern="^[a-zA-Z]+$"  required/><br />
+</div>
+<div class="col-lg-4" ng-class="{ 'has-error' : registerationform.lastname.$invalid && registerationform.lastname.$touched }"> 
+<label>  LAST NAME:</label>
+<input type="text" ng-model="a.Last_Name" name="lastname" class="form-control"  id="ln" placeholder="Enter Last Name"
+ ng-pattern=pattern="^[a-zA-Z]+$"  required/>
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.firstname.$error.required && registerationform.firstname.$touched" class="help-block" style="color:red">
+<b>Firstname is required</b></p>
+<p ng-show="registerationform.firstname.$error.pattern" class="help-block" style="color:red"><b>Only alphabets allowed</b></p>
+<p ng-show="registerationform.lastname.$error.required && registerationform.lastname.$touched" class="help-block" style="color:red">
+<b>Lastname is required</b></p>
+<p ng-show="registerationform.lastname.$error.pattern" class="help-block" style="color:red"><b>Only alphabets allowed</b></p>
+</div>
+<br />
+</div>
+<div class="row"> 
+<div class="col-lg-4" ng-class="{ 'has-error' : registerationform.phonenum.$invalid && registerationform.phonenum.$touched }">
+<label>  PHONE NUM:</label>
+<input type="text" name=phonenum ng-model="a.Phone_Num" class="form-control" placeholder="Enter Phonenum"
+ng-pattern=pattern="^[0-9]+$" title="number only" ng-minlength="10" ng-maxlength="10" id="pn" required/><br />
+</div>
+
+<div class="col-lg-4" ng-class="{ 'has-error' : registerationform.pincode.$invalid && registerationform.pincode.$touched }"> 
+<label>  PINCODE:</label>
+<input type="text" ng-model="a.Pincode" name="pincode" class="form-control" placeholder="Enter Pincode"
+ ng-minlength="6" ng-maxlength="6" id="pc" required />
+<p ng-show="!registerationform.pincode.$error.pattern && registerationform.pincode.$error.minlength"
+class="help-block" style="color:red"><b>Invalid Pincode</b></p>
+<p ng-show="!registerationform.pincode.$error.pattern && registerationform.pincode.$error.maxlength" class="help-block" style="color:red">
+<b>Invalid Pincode</b></p>
+<p ng-show="registerationform.pincode.$error.required && registerationform.pincode.$touched" class="help-block" style="color:red">
+<b>Pincode is required</b>
+</p>
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.phonenum.$error.required && registerationform.phonenum.$touched" class="help-block" style="color:red">
+<b>Number is required</b></p>
+<p ng-show="registerationform.phonenum.$error.pattern" class="help-block" style="color:red"><b>Invalid Number</b></p>
+<p ng-show="!registerationform.phonenum.$error.pattern && registerationform.phonenum.$error.minlength"
+class="help-block" style="color:red"><b>Number should be of 10 digits</b></p>
+<p ng-show="!registerationform.phonenum.$error.pattern && registerationform.phonenum.$error.maxlength" class="help-block" style="color:red">
+<b>Number should be of 10 digits</b></p>
+
+<br />
+</div>
+</div>
+<div class="row">
+<div class="col-lg-8" ng-class="{ 'has-error' : registerationform.address.$invalid && registerationform.address.$touched }">
+<label>  ADDRESS:</label>
+<input type="text" ng-model="a.Address"  name="address"class="form-control" placeholder="Enter Address"
+       id="adr" required/><br />
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.address.$invalid && registerationform.address.$touched" class="help-block" style="color:red">
+<b>Address is required</b></p>
+</br>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-8" ng-class="{true: 'has-error'}[(submitted || registerationform.emailid.$touched)]">
+<label>EMAIL ID:</label>
+<input type="email" ng-model="a.Email_id" name="emailid"class="form-control" placeholder="Enter Email-id"
+       id="e" required/><br />
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.emailid.$error.required && registerationform.emailid.$touched" class="help-block" style="color:red">
+<b>Email-id Required</b></p>
+<p ng-show="(submitted || registerationform.emailid.$touched) && registerationform.emailid.$invalid" ng-bind="emailidErrorTitle"></p>
+<p ng-show="registerationform.emailid.$dirty && registerationform.emailid.$invalid" class="help-block" style="color:red"><b>
+Enter a valid email.</b></p>
+</br>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-8" ng-class="{true: 'has-error'}[(submitted || registerationform.username.$touched) && registerationform.username.$invalid]">
+<label>USERNAME:</label>
+<input type="text" ng-model="a.User_Name" name="username" class="form-control" placeholder="Enter Username" ng-minlength="8"
+ng-maxlength="15" id="u" required/><br />
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.username.$error.required && registerationform.username.$touched" class="help-block" style="color:red">
+<b>UserName Required</b></p>
+<p ng-show="(submitted || registerationform.username.$touched) && registerationform.username.$invalid" ng-bind="usernameErrorTitle"></p>
+<p ng-show="registerationform.username.$invalid && registerationform.username.$error.minlength" class="help-block" style="color:red">
+<b>Username is too short</b></p>
+<p ng-show="registerationform.username.$invalid && registerationform.username.$error.maxlength" class="help-block" style="color:red"><b>Username is too long</b></p>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-4 " ng-class="{ 'has-error' : registerationform.password.$invalid && registerationform.password.$touched }">
+<label>PASSWORD:</label>
+<input type="password" ng-model="a.Password" name="password" class="form-control" placeholder="Enter Password"
+ ng-minlength="7" id="p" required/><br />
+<br /></div>
+<div class="col-lg-4" ng-class="{ 'has-error' : registerationform.confirmpassword.$invalid && registerationform.confirmpassword.$touched }">
+<label>CONFIRM PASSWORD:</label>
+<input type="password" ng-model="ConfirmPassword" name="confirmpassword" class="form-control" placeholder="Enter Password again" 
+ng-pattern="a.password" id="cp" required/>
+</div>
+<div class="col-lg-4"> 
+<p ng-show="registerationform.password.$error.required && registerationform.password.$touched" class="help-block" style="color:red">
+<b>Password is mandatory</b></p>
+<p ng-show="registerationform.password.$error.minlength" class="help-block" style="color:red"><b>Too Short</b></p>
+<p ng-show="registerationform.confirmpassword.$error.required && registerationform.confirmpassword.$touched" class="help-block" style="color:red">
+<b>Re-enter your password</b></p>
+<p ng-show="registerationform.confirmpassword.$error.pattern" class="help-block" style="color:red"><b>Don't match</b></p>
+</br>
+</div>
+</div>
+<div ng-controller="cyberController">
+<center><button type="submit" class="btn-danger" id="register" height="30" ng-disabled="registerationform.$invalid" ng-click-once
+  ng-click="PostRegistrationDetail()" >REGISTER</button></center>
+</div>
+</div>
+</form>
+    
+<p>{{a}}</p>
+</div>
+
+</body>
+</html>
