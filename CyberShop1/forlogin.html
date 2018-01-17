@@ -1,0 +1,67 @@
+﻿<html ng-app="CyberShop">
+<head>
+    <meta charset="utf-8" />
+    <title>CYBERSHOP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="Scripts/Service.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .borderforforms {
+            width: 40%;
+            height: 55%;
+            padding-left: 1em;
+            padding-right: 1em;
+            padding-top: 2em;
+            border-radius: 25px;
+            /*background: #73AD21;*/
+            /*background: aqua;*/
+            background-color:coral;
+            border: thick;
+        }
+
+        label {
+            /*font-weight:bold;*/
+            font-family: Arial;
+            font-size: large;
+        }
+
+
+        .content {
+            margin: auto;
+        }
+
+
+
+
+        h1 {
+            font-size: xx-large;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <h1>CYBERSHOP</h1>
+</head>
+<body ng-controller="cyberController">
+    <hr />
+    <form class="borderforforms content" name="registerationform" novalidate>
+<div class="form-group-lg">
+<label>USER NAME:</label>
+<input type="text" ng-model="c.UserNameForLogin" name="usernameforlogin" class="form-control" placeholder="Enter User Name" required/><br />
+<br /><br />
+<label>PASSWORD:</label>
+<input type="password" ng-model="c.PasswordForLogin" name="passwordforlogin" class="form-control" placeholder="Enter Password" required/>
+<br /><br />
+<center><button class="btn-lg btn-primary" height="30" ng-click="GetLoginDetail(c)">LOGIN</button></center>
+</div>
+<p>{{c}}</p>
+
+</form>
+<p>{{b}}</p>
+
+</body>
+</html>
