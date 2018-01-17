@@ -6,6 +6,7 @@
     <script src="Scripts/jquery-1.9.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-cookies.js"></script>
     <script src="app.js"></script>
     <script src="Scripts/Service.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
@@ -43,6 +44,10 @@
             background-color: black;
             color: white;
         }
+
+        classforbutton{
+            border-radius: 8px;
+        }
     </style>
     <h1>CYBERSHOP</h1>
 </head>
@@ -61,7 +66,11 @@
 <p>{{c}}</p>
 
 </form>
-<p>{{b}}</p>
-
+<br /><br /><br />
+<center><button class="btn-lg"><a href="Page4.html">{{ifsuccessfullyloggedin}}</a></button></center>
+<br /><br />
+<CENTER>NEW USER?
+<button class="btn-lg" .classforbutton><a href="Index.html">REGISTER HERE</a></button>
+</CENTER>
 </body>
 </html>

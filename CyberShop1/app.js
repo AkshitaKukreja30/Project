@@ -1,9 +1,11 @@
-﻿var CyberShop = angular.module('CyberShop', []);
-CyberShop.controller('cyberController', function ($scope, myService) {
+﻿var CyberShop = angular.module('CyberShop', [/*'ngCookies'*/]);
+CyberShop.controller('cyberController'/*, '$cookies'*/,function ($scope, myService, $location/*, $cookies*/) {
     $scope.errorwillcomehere = "";
     $scope.credentialserror = "";
     $scope.regexFirstName = "^[a-zA-Z]+$";
     $scope.loginButton = false;
+    $scope.ifsuccessfullyloggedin = "";
+    var c= $scope.c;
     
     $scope.PostRegistrationDetail = function () {
         // here comes the power ;-)
@@ -11,8 +13,8 @@ CyberShop.controller('cyberController', function ($scope, myService) {
             var promisePost = myService.post(a);
         
         
-        alert("successfully registered");
-
+            alert("successfully registered");
+         //  window.location.href = 'Page4.html';
         //$scope.ng-disabled=true;
 
     }
@@ -35,6 +37,7 @@ CyberShop.controller('cyberController', function ($scope, myService) {
                     $scope.loginButton = false;
                     
                     
+                    
                 }
             );  
             
@@ -50,6 +53,8 @@ CyberShop.controller('cyberController', function ($scope, myService) {
                 $scope.credentialserror = "Credentials match!";
                 
                 alert("Credentials match!");
+                //$cookies.putObject('user', alldetailsforlogin);
+                $scope.ifsuccessfullyloggedin = "SHOP";
             }
                 ,
                 function (err) {
