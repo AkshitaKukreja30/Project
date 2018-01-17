@@ -5,7 +5,8 @@ CyberShop.controller('cyberController'/*, '$cookies'*/,function ($scope, myServi
     $scope.regexFirstName = "^[a-zA-Z]+$";
     $scope.loginButton = false;
     $scope.ifsuccessfullyloggedin = "";
-    var c= $scope.c;
+    var c = $scope.c;
+    $scope.usernameTest = localStorage.getItem('username');
     
     $scope.PostRegistrationDetail = function () {
         // here comes the power ;-)
@@ -51,7 +52,9 @@ CyberShop.controller('cyberController'/*, '$cookies'*/,function ($scope, myServi
             var promiseGetSingle = myService.checkLogin(alldetailsforlogin).then(function () {
 
                 $scope.credentialserror = "Credentials match!";
-                
+                localStorage.setItem('username', $scope.c.UserNameForLogin);
+                $scope.usernameTest = localStorage.getItem('username');
+                console.log($scope)
                 alert("Credentials match!");
                 //$cookies.putObject('user', alldetailsforlogin);
                 $scope.ifsuccessfullyloggedin = "SHOP";
