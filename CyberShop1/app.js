@@ -58,12 +58,15 @@ CyberShop.controller('cyberController'/*, '$cookies'*/,function ($scope, myServi
                 alert("Credentials match!");
                 //$cookies.putObject('user', alldetailsforlogin);
                 $scope.ifsuccessfullyloggedin = "SHOP";
+                debugger
+                console.log("correct");
             }
                 ,
                 function (err) {
                     console.log("ERROR" + err);
                     $scope.credentialserror = "Incorrect Username/Password";
                     alert("Incorrect Username/Password");
+                    console.log("incorrect");
 
                 }
             );  

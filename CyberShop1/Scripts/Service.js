@@ -26,6 +26,7 @@ CyberShop.service('myService', function ($http) {
         
         return $http.get("/api/RegistrationDetails/GetRegistrationDetail2?username=" + foruserlogin.UserNameForLogin
             + "&password=" + foruserlogin.PasswordForLogin);
+        debugger
     };
 
 

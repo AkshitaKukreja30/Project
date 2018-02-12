@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Sno" />
     </Key>
-    <Property Name="Sno" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Sno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="First_Name" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Last_Name" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Phone_Num" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -12,7 +12,7 @@
     <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Email_id" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
   <EntityContainer Name="cshopModelStoreContainer">
     <EntitySet Name="RegistrationDetails" EntityType="Self.RegistrationDetails" Schema="dbo" store:Type="Tables" />

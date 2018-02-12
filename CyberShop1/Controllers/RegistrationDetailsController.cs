@@ -8,8 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
-
+using System.Security.Cryptography;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
 using CyberShop1.Models;
@@ -62,13 +63,14 @@ namespace CyberShop1.Controllers
             var separator2 = detailsforlogin.LastIndexOf('=');
             separator2++;
             String tset = detailsforlogin.Substring(separator2);
-            
+            tset = encryptpass(tset);
+
             RegistrationDetail ifuserexists = db.RegistrationDetails.Where(a => a.User_Name.Equals(actualusernameforlogin)).FirstOrDefault();
             if (ifuserexists == null)
             {
                 return NotFound();
             }
-
+            
             else if (ifuserexists != null && tset.Equals(ifuserexists.Password))
             {
                 return Ok();
@@ -83,15 +85,16 @@ namespace CyberShop1.Controllers
             
         }
 
+        public string encryptpass(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
+        }
 
-
-
-
-
-
-
-
-
+       
 
 
         // GET: api/RegistrationDetails/5
@@ -101,7 +104,9 @@ namespace CyberShop1.Controllers
 
         public IHttpActionResult GetLogin(RegistrationDetail alldetails)
         {
+            alldetails.Password = encryptpass(alldetails.Password);
             var checkfordetails = db.RegistrationDetails;
+   
             RegistrationDetail ifuserexists = checkfordetails.Where(a => a.User_Name.Equals(alldetails.User_Name)).FirstOrDefault();
             //User foundUser = db.User.Where(a => a.UserName.Equals(user.UserName)).FirstOrDefault();
             if (ifuserexists == null)
@@ -170,6 +175,7 @@ namespace CyberShop1.Controllers
         [ResponseType(typeof(RegistrationDetail))]
         public IHttpActionResult PostRegistrationDetail(RegistrationDetail registrationDetail)
         {
+            //registrationDetail.Password=encryptpass(registrationDetail.Password);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -177,17 +183,26 @@ namespace CyberShop1.Controllers
             //Check whether this username exists in db or not.
 
             //true,false
+            byte[] salt;
+           new RNGCryptoServiceProvider().GetBytes
+           (salt= new byte[16]);
+           var pbkdf2 = new Rfc2898DeriveBytes(registrationDetail.Password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
 
-
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            registrationDetail.Password = Convert.ToBase64String(hashBytes);
+            //Console.log(registrationDetail.Password);
             
-            db.RegistrationDetails.Add(registrationDetail);
+        db.RegistrationDetails.Add(registrationDetail);
             
 
             try
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 if (RegistrationDetailExists(registrationDetail.Sno))
                 {
